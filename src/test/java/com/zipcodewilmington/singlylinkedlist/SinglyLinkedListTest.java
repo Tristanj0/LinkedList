@@ -1,94 +1,81 @@
 package com.zipcodewilmington.singlylinkedlist;
 
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static org.testng.AssertJUnit.assertTrue;
-import static sun.nio.cs.Surrogate.is;
 
 /**
  * Created by leon on 1/10/18.
  */
 public class SinglyLinkedListTest {
-
     @Test
-    public void isEmptyMethod_NewListReturns_True() {
-      SinglyLinkedList list = new SinglyLinkedList();
+    public void testAddFirstElement() {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        Assert.assertEquals(singlyLinkedList.getSize(), 1);
+        Assert.assertEquals(singlyLinkedList.getHead().getData(), 10);
+        Assert.assertEquals(singlyLinkedList.getHead(),
+                singlyLinkedList.getTail());
+        Assert.assertNull(singlyLinkedList.getHead().getNext());
 
-      assertTrue(list.isEmpty(), is(equalTo(true)));
-    }
-
-    @Test
-    public void sizeMethod_NewListReturns_Zero() {
-        SinglyLinkedList list = new SinglyLinkedList();
-
-        assertTrue(list.size(), is(equalTo(0)));
     }
 
     @Test
-    public void isEmptyMethod_NonEmptyList_Returns_False() {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append("some data");
-
-        assertTrue(list.isEmpty(), is(equalTo(false)));
+    public void testAddLastElement() {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        singlyLinkedList.addLastElement(20);
+        Assert.assertEquals(singlyLinkedList.getSize(), 2);
+        Assert.assertEquals(singlyLinkedList.getTail().getData(), 20);
+        Assert.assertNull(singlyLinkedList.getTail().getNext());
     }
 
     @Test
-    public void sizeMethod_WithSingleElement_ReturnsCorrectResult() {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append("data");
-
-        assertTrue(list.size(), is(equalTo(1)));
+    public void testAddElementAtPosition() throws Exception {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        singlyLinkedList.addLastElement(15);
+        singlyLinkedList.addLastElement(20);
+        singlyLinkedList.addElementAtPosition(2, 17);
+        Assert.assertEquals(singlyLinkedList.getSize(), 4);
+        Assert.assertEquals(singlyLinkedList.getHead().getNext().getNext()
+                .getData(), 17);
     }
 
     @Test
-    public void sizeMethod_MultiplyElements_ReturnsCorrectResult() {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append("1");
-        list.append("2");
-        list.append("3");
-
-        assertTrue(list.size(), is(equalTo(3)));
+    public void testRemoveFirstElement() throws Exception {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        singlyLinkedList.addLastElement(15);
+        singlyLinkedList.addLastElement(20);
+        singlyLinkedList.addElementAtPosition(2, 17);
+        singlyLinkedList.removeFirstElement();
+        Assert.assertEquals(singlyLinkedList.getSize(), 3);
+        Assert.assertEquals(singlyLinkedList.getHead().getData(), 15);
     }
 
     @Test
-    public void getMethod_ListWithSingleElement_ReturnsThatElement() {
-        String element = "the only element";
-
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append(element);
-
-        assertTrue(list.get(0), is(equalTo(element)));
+    public void testRemoveLastElement() throws Exception {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        singlyLinkedList.addLastElement(15);
+        singlyLinkedList.addLastElement(20);
+        singlyLinkedList.addElementAtPosition(2, 17);
+        singlyLinkedList.removeLastElement();
+        Assert.assertEquals(singlyLinkedList.getSize(), 3);
+        Assert.assertEquals(singlyLinkedList.getTail().getData(), 17);
     }
 
     @Test
-    public void getMethod_ListWithMultipleElements_ReturnsElement_GivenIndex() {
-        String thirdElement = "third element";
-
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append("first element");
-        list.append("second element");
-        list.append(thirdElement);
-        list.append("fourth element");
-
-        assertTrue(list.get(2), is(equalTo(thirdElement)));
+    public void testRemoveAllElementWithTargetValue() throws Exception {
+        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        singlyLinkedList.addFirstElement(10);
+        singlyLinkedList.addLastElement(15);
+        singlyLinkedList.addLastElement(10);
+        singlyLinkedList.addElementAtPosition(2, 17);
+        singlyLinkedList.removeAllElementWithTargetValue(10);
+        Assert.assertEquals(singlyLinkedList.getSize(), 2);
+        Assert.assertEquals(singlyLinkedList.getHead().getData(), 15);
+        Assert.assertEquals(singlyLinkedList.getTail().getData(), 17);
     }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getMethod_ThrowsException_ForNegativeIndex() {
-        SinglyLinkedList list = new SinglyLinkedList();
-
-        list.get(-1);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getMethod_ThrowsException_ForIndexLargerThanSize() {
-        SinglyLinkedList list = new SinglyLinkedList();
-        list.append("0");
-        list.append("1");
-        list.append("2");
-
-        list.get(3);
-    }
-
 }

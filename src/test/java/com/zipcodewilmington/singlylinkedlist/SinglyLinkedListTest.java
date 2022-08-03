@@ -1,13 +1,15 @@
 package com.zipcodewilmington.singlylinkedlist;
 
+import org.junit.Assert;
+import org.junit.Test;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+
 
 /**
  * Created by leon on 1/10/18.
  */
 public class SinglyLinkedListTest {
+
     @Test
     public void testAddFirstElement() {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
@@ -17,7 +19,6 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(singlyLinkedList.getHead(),
                 singlyLinkedList.getTail());
         Assert.assertNull(singlyLinkedList.getHead().getNext());
-
     }
 
     @Test
@@ -31,7 +32,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void testAddElementAtPosition() throws Exception {
+    public void testAddElementAtPosition()  {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
         singlyLinkedList.addFirstElement(10);
         singlyLinkedList.addLastElement(15);
@@ -43,7 +44,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void testRemoveFirstElement() throws Exception {
+    public void testRemoveFirstElement()  {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
         singlyLinkedList.addFirstElement(10);
         singlyLinkedList.addLastElement(15);
@@ -55,7 +56,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void testRemoveLastElement() throws Exception {
+    public void testRemoveLastElement()  {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
         singlyLinkedList.addFirstElement(10);
         singlyLinkedList.addLastElement(15);
@@ -67,7 +68,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void testRemoveAllElementWithTargetValue() throws Exception {
+    public void testRemoveAllElementWithTargetValue()  {
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
         singlyLinkedList.addFirstElement(10);
         singlyLinkedList.addLastElement(15);

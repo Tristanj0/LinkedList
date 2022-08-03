@@ -1,11 +1,10 @@
 package com.zipcodewilmington.singlylinkedlist;
 
-import javax.xml.soap.Node;
-
 /**
  * Created by leon on 1/10/18.
  */
 public class SinglyLinkedList {
+
     private Node head;
     private Node tail;
     private int size;
@@ -93,7 +92,6 @@ public class SinglyLinkedList {
             Node temp = head;
             for (int i = 1; i < size; i++) {
                 if (temp.getNext() == tail) {
-                    tail = temp;
                     tail.setNext(null);
                 } else {
                     temp = temp.getNext();
@@ -103,30 +101,30 @@ public class SinglyLinkedList {
         }
     }
 
-    public void addElementAtPosition(int index, int data) throws Exception {
+    public void addElementAtPosition(int index, int data)  {
         if (index < size && index >= 0) {
-            if (index == 0) {
-                addFirstElement(data);
-            } else if (index == size) {
-                addLastElement(data);
-            } else {
-                Node node = new Node(data, null);
-                Node temp = head;
-                for (int i = 1; i < size; i++) {
-                    if (i == index) {
-                        Node afterNode = temp.getNext();
-                        temp.setNext(node);
-                        node.setNext(afterNode);
-                        size++;
-                    } else {
-                        temp = temp.getNext();
-                    }
+            addFirstElement(data);
+        } else if (index == size) {
+            addLastElement(data);
+        } else {
+            Node node = new Node(data, null);
+            Node temp = head;
+            for (int i = 1; i < size; i++) {
+                if (i == index) {
+                    Node afterNode = temp.getNext();
+                    temp.setNext(node);
+                    node.setNext(afterNode);
+                    size++;
+                } else {
+                    temp = temp.getNext();
                 }
             }
-        } else {
-            throw new Exception("index > size");
         }
     }
+//else {
+//        throw new Exception("index > size");
+
+
 
     public void removeAllElementWithTargetValue(int data) {
         if (head.getData() == data) {
@@ -169,3 +167,8 @@ public class SinglyLinkedList {
         }
     }
 }
+
+
+
+
+
